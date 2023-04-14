@@ -1,0 +1,51 @@
+﻿@model List<Ouvrage>
+@using System.Security.Claims
+@{
+    var connected = Context.User.Identity!.IsAuthenticated;
+    int nombreDeReservations = 0;
+    if (connected)
+    {
+        int id = Int32.Parse(Context.User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+        nombreDeReservations = int.Parse(Context.User.FindFirstValue("NombreDeReservations"));
+    }
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <form asp-controller="Catalogue" asp-action="Index" method="get" class="form-control">
+                <input type="radio" name="searchType" value="Titre" checked /> Titre
+                <input type="radio" name="searchType" value="Auteur" /> Auteur
+                <input type="text" name="searchString" />
+                <input type="submit" value="Filter"/>
+            </form>
+
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(v => v[0].Titre)</th>
+            <th>@Html.DisplayNameFor(v => v[0].Auteur)</th>
+            <th>@Html.DisplayNameFor(v => v[0].Exemplaires)</th>
+            <th>@Html.DisplayNameFor(v => v[0].QuantiteDisponible)</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var ouvrage in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(v => ouvrage.Titre)</td>
+            <td>@Html.DisplayFor(v => ouvrage.Auteur)</td>
+            <td>@Html.DisplayFor(v => ouvrage.Exemplaires)</td>
+            <td>@Html.DisplayFor(v => ouvrage.QuantiteDisponible)</td>
+            <td>
+                @if (connected && ouvrage.QuantiteDisponible > 0 && nombreDeReservations < 3){
+                    <a>lien pour reserver</a>
+                }
+               @* else if (roleadmin)
+                {
+                    <a>allo</a>
+                }*@
+            </td>
+        </tr>
+    }
+</table>

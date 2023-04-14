@@ -11,8 +11,8 @@ using ProjetFinalWD4.Data;
 namespace ProjetFinalWD4.Migrations
 {
     [DbContext(typeof(Bibliotheque))]
-    [Migration("20230408173710_firstmigration")]
-    partial class firstmigration
+    [Migration("20230412191615_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

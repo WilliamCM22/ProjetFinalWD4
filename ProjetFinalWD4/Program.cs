@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using ProjetFinalWD4.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Bibliotheque>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
+        options.LoginPath = "/Authentification/Connexion";
+        options.AccessDeniedPath = "/Authentification/Interdit";
+    });
+
+builder.Services.AddMvc().AddMvcLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddHttpContextAccessor();
+
 
 var app = builder.Build();
 
@@ -27,6 +41,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

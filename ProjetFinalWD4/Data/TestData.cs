@@ -191,7 +191,7 @@ namespace ProjetFinalWD4.Data
 
             var ouvrage19 = new Ouvrage()
             {
-                Titre = "Le peit Chose",
+                Titre = "Le petit Chose",
                 Auteur = "Alphonse Daudet",
                 Exemplaires = 1
             };
@@ -212,7 +212,7 @@ namespace ProjetFinalWD4.Data
 
             var ouvrage22 = new Ouvrage()
             {
-                Titre = "tartarin de Tarascon",
+                Titre = "Tartarin de Tarascon",
                 Auteur = "Alphonse Daudet",
                 Exemplaires = 1
             };
@@ -259,7 +259,7 @@ namespace ProjetFinalWD4.Data
                 Ouvrage = ouvrage3
             };
 
-            await bibliotheque.Reservations.AddRangeAsync(new Reservation[] { reservation1, reservation2, reservation3, reservation4, reservation5 });
+            await bibliotheque.Reservations.AddRangeAsync(new Reservation[] { reservation1, reservation2, reservation3, reservation4, reservation5, reservation6});
 
             await bibliotheque.SaveChangesAsync();
 

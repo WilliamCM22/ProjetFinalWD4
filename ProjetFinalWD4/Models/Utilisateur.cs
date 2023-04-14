@@ -16,7 +16,7 @@ namespace ProjetFinalWD4.Models
         public required string Nom { get; set; }
         [EmailAddress]
         public required string Courriel { get; set; }
-        [Column(TypeName = "varbinary(max)"), Display(Name = "Mot de passe")]
+        [Column(TypeName = "varbinary(max)"), Display(Name = "Mot de passe"), DataType(DataType.Password)]
         public required string MotDePasse { get; set; }
         public required Langue Langue { get; set; }
         public required bool Administrateur { get; set; }
