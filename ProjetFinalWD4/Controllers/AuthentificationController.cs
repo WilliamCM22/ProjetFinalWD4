@@ -26,7 +26,7 @@ namespace ProjetFinalWD4.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Connexion(Utilisateur formulaire, string? ReturnUrl)
+        public async Task<IActionResult> Connexion(LoginUtilisateur formulaire, string? ReturnUrl)
         {
             if (!ModelState.IsValid) { return View(); }
 
@@ -47,7 +47,6 @@ namespace ProjetFinalWD4.Controllers
             var claims = new List<Claim> {
                 new Claim(ClaimTypes.Email, user.Courriel),
                 new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
-                new Claim("NombreDeReservations", _bibliotheque.Reservations.Count(r => r.Utilisateur.ID == user.ID).ToString())
             };
 
             user.Roles.ForEach(role => {
