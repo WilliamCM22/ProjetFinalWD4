@@ -6,11 +6,11 @@ using ProjetFinalWD4.Models;
 
 namespace ProjetFinalWD4.Controllers
 {
-    public class CatalogueController : Controller
+    public class OuvrageController : Controller
     {
         private readonly Bibliotheque _bibliotheque;
         
-        public CatalogueController(Bibliotheque bibliotheque)
+        public OuvrageController(Bibliotheque bibliotheque)
         {
             _bibliotheque= bibliotheque;
         }

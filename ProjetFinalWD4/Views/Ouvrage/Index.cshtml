@@ -13,7 +13,7 @@
 <table class="table">
     <thead>
         <tr>
-            <form asp-controller="Catalogue" asp-action="Index" method="get" class="form-control">
+            <form asp-controller="Ouvrage" asp-action="Index" method="get" class="form-control">
                 <input type="radio" name="searchType" value="Titre" checked /> Titre
                 <input type="radio" name="searchType" value="Auteur" /> Auteur
                 <input type="text" name="searchString" />
@@ -43,7 +43,7 @@
                 }
                @* else if (roleadmin)
                 {
-                    <a>allo</a>
+                    <a>affiche editer</a>
                 }*@
             </td>
         </tr>
