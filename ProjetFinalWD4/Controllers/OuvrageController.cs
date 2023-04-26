@@ -53,14 +53,23 @@ namespace ProjetFinalWD4.Controllers
 
             return View(ouvragesReservations);
         }
-
+  
         public async Task<IActionResult> Modification(int id)
         {
             var ouvrage = await _bibliotheque.Ouvrages.FindAsync(id);
 
             if (ouvrage != null)
             {
-                return View(ouvrage);
+                var ouvragesReservations = new OuvragesReservations
+                {
+                    ID = ouvrage.ID,
+                    Titre = ouvrage.Titre,
+                    Auteur = ouvrage.Auteur,
+                    Exemplaires = ouvrage.Exemplaires,
+                    QuantiteDisponible = 0
+                };
+
+                return View(ouvragesReservations);
             }
             return NotFound();
         }
@@ -81,6 +90,12 @@ namespace ProjetFinalWD4.Controllers
                 ouvrage.Titre = données.Titre;
                 ouvrage.Auteur = données.Auteur;
                 ouvrage.Exemplaires = données.Exemplaires;
+
+                var reservations = await _bibliotheque.Reservations.Where(r => r.Ouvrage.ID == id).ToListAsync();
+                foreach (var reservation in reservations)
+                {
+                    _bibliotheque.Reservations.Remove(reservation);
+                }
 
                 await _bibliotheque.SaveChangesAsync();
 
