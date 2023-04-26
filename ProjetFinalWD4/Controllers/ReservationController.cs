@@ -11,9 +11,13 @@ namespace ProjetFinalWD4.Controllers
         {
             _bibliotheque = bibliotheque;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            var reservations = await _bibliotheque.Reservations.ToListAsync();
+            var reservations = await _bibliotheque.Reservations
+                .Include(v => v.Ouvrage)
+                .Where(v => v.Utilisateur.ID == id) 
+                .ToListAsync();
+            
             return View(reservations);
         }
     }
