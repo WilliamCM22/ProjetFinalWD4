@@ -2,24 +2,24 @@
 
 @if (Model.IsAuthenticated)
 {
-    <li class="nav-item">
+    <ul class="nav-item">
         <a class="nav-link text-dark"
        asp-controller="Authentification"
        asp-action="Deconnexion">Déconnexion</a>
-    <li class="nav-item">
+    </ul>
+    <ul class="nav-item">
         <div>Bienvenue: @Model.Prenom , @Model.Nom</div>
         <div>Nombre de reservations: @Model.NombreDeReservations</div>
-    </li>
-        </li>
+    </ul>
 }
 else
 {
-    <li class="nav-item">
+    <ul class="nav-item">
         <a class="nav-link text-dark"
        asp-controller="Authentification"
        asp-action="Connexion"
        asp-route-ReturnUrl="@Context.Request.Path">Connexion</a>
-    </li>
+    </ul>
 }
 
 

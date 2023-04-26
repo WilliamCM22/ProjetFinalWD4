@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@model List<OuvragesReservations>
+@using System.Security.Claims
+@{
+    var connected = Context.User.Identity!.IsAuthenticated;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,8 +33,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                            @await Component.InvokeAsync("Login")
+                        @if (connected)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Index">Reservations</a>
+                            </li>
+                        }
                     </ul>
+                    @await Component.InvokeAsync("Login")
                 </div>
             </div>
         </nav>

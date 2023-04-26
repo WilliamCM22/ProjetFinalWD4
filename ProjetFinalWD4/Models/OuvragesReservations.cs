@@ -1,4 +1,6 @@
-﻿namespace ProjetFinalWD4.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetFinalWD4.Models
 {
     public class OuvragesReservations
     {
@@ -6,6 +8,7 @@
         public required string Titre { get; set; }
         public required string Auteur { get; set; }
         public required int Exemplaires { get; set; }
-        public required int NombreDeReservations { get; set; }
+        [Display(Name = "Quantité Disponible")]
+        public required int QuantiteDisponible { get; set; }
     }
 }

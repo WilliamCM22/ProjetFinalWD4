@@ -1,0 +1,24 @@
+﻿@model List<Reservation>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(v => v[0].Ouvrage.Titre)</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var reservation in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(v => reservation.Ouvrage.Titre)</td>
+            <td>
+                @if (Context.User.IsInRole("Administrateur"))
+                {
+               
+                    <a asp-action="Confirmation" asp-route-id="@reservation.ID">Supprimer</a>
+                }
+            </td>
+        </tr>
+    }
+</table>

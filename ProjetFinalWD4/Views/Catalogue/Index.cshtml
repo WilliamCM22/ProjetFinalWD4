@@ -23,7 +23,7 @@
             <th>@Html.DisplayNameFor(v => v[0].Titre)</th>
             <th>@Html.DisplayNameFor(v => v[0].Auteur)</th>
             <th>@Html.DisplayNameFor(v => v[0].Exemplaires)</th>
-            <th>@Html.DisplayNameFor(v => v[0].NombreDeReservations)</th>
+            <th>@Html.DisplayNameFor(v => v[0].QuantiteDisponible)</th>
             <th></th>
         </tr>
     </thead>
@@ -34,16 +34,21 @@
             <td>@Html.DisplayFor(v => ouvrage.Titre)</td>
             <td>@Html.DisplayFor(v => ouvrage.Auteur)</td>
             <td>@Html.DisplayFor(v => ouvrage.Exemplaires)</td>
-            <td>@Html.DisplayFor(v => ouvrage.NombreDeReservations)</td>
-            <td>
-                @if (connected && ouvrage.NombreDeReservations > 0 && ouvrage.NombreDeReservations < 3){
+            <td>@Html.DisplayFor(v => ouvrage.QuantiteDisponible)</td>
+            @if (connected && ouvrage.QuantiteDisponible > 0 && ouvrage.QuantiteDisponible < 3){
+                <td>
                     <a>lien pour reserver</a>
-                }
-               @* else if (roleadmin)
-                {
-                    <a>affiche editer</a>
-                }*@
+                </td>
+            }
+            else {
+                <td></td>
+            }
+            @if (Context.User.IsInRole("Admin"))
+            {
+            <td>
+                <a>lien pour editer</a>
             </td>
+            }
         </tr>
     }
 </table>
