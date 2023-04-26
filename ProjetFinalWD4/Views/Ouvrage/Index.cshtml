@@ -46,7 +46,7 @@
             @if (Context.User.IsInRole("Admin"))
             {
             <td>
-                <a>lien pour editer</a>
+                        <a asp-controller="Ouvrage" asp-action="Modification" asp-route-id="@ouvrage.ID">Modifier</a>
             </td>
             }
         </tr>

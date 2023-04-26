@@ -1,0 +1,32 @@
+﻿@model OuvragesReservations
+
+<div class="row">
+	<div class="col-4">
+		<form method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+			<div>
+				<label asp-for="Titre" class="form-label"></label>
+				<input asp-for="Titre" class="form-control" />
+				<span asp-validation-for="Titre" class="text-danger"></span>
+			</div>
+
+			<div>
+				<label asp-for="Auteur" class="form-label"></label>
+				<input asp-for="Auteur" class="form-control" />
+				<span asp-validation-for="Titre" class="text-danger"></span>
+			</div>
+
+			<div>
+				<label asp-for="Exemplaires" class="form-label"></label>
+				<input asp-for="Exemplaires" class="form-control" />
+				<span asp-validation-for="Titre" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<input type="submit" value="Confirmer" class="btn btn-primary" />
+				<a asp-action="Index">Annuler</a>
+			</div>
+		</form>
+	</div>
+</div>

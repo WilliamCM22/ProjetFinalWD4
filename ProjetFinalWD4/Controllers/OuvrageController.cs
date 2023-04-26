@@ -54,5 +54,41 @@ namespace ProjetFinalWD4.Controllers
             return View(ouvragesReservations);
         }
 
+        public async Task<IActionResult> Modification(int id)
+        {
+            var ouvrage = await _bibliotheque.Ouvrages.FindAsync(id);
+
+            if (ouvrage != null)
+            {
+                return View(ouvrage);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Modification(int id, OuvragesReservations données)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(données);
+            }
+
+            var ouvrage = await _bibliotheque.Ouvrages.FindAsync(id);
+
+            if (ouvrage != null)
+            {
+                ouvrage.Titre = données.Titre;
+                ouvrage.Auteur = données.Auteur;
+                ouvrage.Exemplaires = données.Exemplaires;
+
+                await _bibliotheque.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            return NotFound();
+        }
+
+
     }
 }
