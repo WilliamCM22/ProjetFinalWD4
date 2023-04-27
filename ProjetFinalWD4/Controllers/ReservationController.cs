@@ -60,7 +60,6 @@ namespace ProjetFinalWD4.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Administrateur")]
         public async Task<IActionResult> Suppression(int id)
         {
             var reservation = await _bibliotheque.Reservations.FindAsync(id);
