@@ -19,12 +19,10 @@ namespace ProjetFinalWD4.Controllers
         {
             _bibliotheque = bibliotheque;
         }
-
         public IActionResult Connexion()
         {
             return View();
         }
-
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Connexion(LoginUtilisateur formulaire, string? ReturnUrl)
         {
@@ -61,7 +59,7 @@ namespace ProjetFinalWD4.Controllers
             return ReturnUrl != null ? LocalRedirect(ReturnUrl) : RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin, Usager")]
         public async Task<IActionResult> Deconnexion()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

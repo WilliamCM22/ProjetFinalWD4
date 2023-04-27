@@ -35,9 +35,10 @@
             <td>@Html.DisplayFor(v => ouvrage.Auteur)</td>
             <td>@Html.DisplayFor(v => ouvrage.Exemplaires)</td>
             <td>@Html.DisplayFor(v => ouvrage.QuantiteDisponible)</td>
-            @if (connected && ouvrage.QuantiteDisponible > 0 && ouvrage.QuantiteDisponible < 3){
+            @if (connected && ouvrage.QuantiteDisponible > 0 && ViewBag.ReservationCount < 3)
+            {
                 <td>
-                    <a>lien pour reserver</a>
+                    <a asp-controller="Reservation" asp-action="Ajout" asp-route-id="@ouvrage.ID">Reserver</a>
                 </td>
             }
             else {
@@ -46,7 +47,7 @@
             @if (Context.User.IsInRole("Admin"))
             {
             <td>
-                        <a asp-controller="Ouvrage" asp-action="Modification" asp-route-id="@ouvrage.ID">Modifier</a>
+                <a asp-controller="Ouvrage" asp-action="Modification" asp-route-id="@ouvrage.ID">Modifier</a>
             </td>
             }
         </tr>
