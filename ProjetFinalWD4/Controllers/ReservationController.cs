@@ -15,6 +15,7 @@ namespace ProjetFinalWD4.Controllers
         {
             _bibliotheque = bibliotheque;
         }
+        [Authorize(Roles = "Admin, Usager")]
         public async Task<IActionResult> Index(int id)
         {
             var reservations = await _bibliotheque.Reservations
@@ -24,6 +25,7 @@ namespace ProjetFinalWD4.Controllers
             
             return View(reservations);
         }
+<<<<<<< HEAD
 
         public async Task<IActionResult> Ajout(int id)
         {
@@ -76,5 +78,7 @@ namespace ProjetFinalWD4.Controllers
             return NotFound();
         }
 
+=======
+>>>>>>> e75a14d9db208fdf2d6a01a57ec969351f2ec1bc
     }
 }

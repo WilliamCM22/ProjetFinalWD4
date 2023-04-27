@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using ProjetFinalWD4.Data;
 using ProjetFinalWD4.Models;
 using System.Collections.Immutable;
-using System.Security.Claims;
 
 namespace ProjetFinalWD4.Controllers
 {
@@ -16,13 +16,13 @@ namespace ProjetFinalWD4.Controllers
         {
             _bibliotheque= bibliotheque;
         }
-        
+        //non necessaire....
         public async Task<IActionResult> Index()
         {
             var ouvrages = await _bibliotheque.Ouvrages.ToListAsync();
             return View(ouvrages);
         }
-
+        [Authorize(Roles = "Admin, Usager")]
         [HttpGet]
         public async Task<IActionResult> Index(string searchString, string searchType)
         {
@@ -59,7 +59,7 @@ namespace ProjetFinalWD4.Controllers
 
             return View(ouvragesReservations);
         }
-  
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Modification(int id)
         {
             var ouvrage = await _bibliotheque.Ouvrages.FindAsync(id);
@@ -80,7 +80,7 @@ namespace ProjetFinalWD4.Controllers
             }
             return NotFound();
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Modification(int id, OuvragesReservations données)
