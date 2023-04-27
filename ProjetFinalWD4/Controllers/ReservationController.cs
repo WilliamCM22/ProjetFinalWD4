@@ -26,6 +26,7 @@ namespace ProjetFinalWD4.Controllers
             return View(reservations);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         public async Task<IActionResult> Ajout(int id)
         {
@@ -78,6 +79,8 @@ namespace ProjetFinalWD4.Controllers
             return NotFound();
         }
 
+=======
+>>>>>>> e75a14d9db208fdf2d6a01a57ec969351f2ec1bc
 =======
 >>>>>>> e75a14d9db208fdf2d6a01a57ec969351f2ec1bc
     }
