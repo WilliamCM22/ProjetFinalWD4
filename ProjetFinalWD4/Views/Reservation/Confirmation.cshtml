@@ -1,0 +1,8 @@
+﻿@model Reservation
+
+<p>Supprimer la reservation?</p>
+
+<form asp-action="Suppression" asp-route-id="@Model.ID">
+    <button type="submit" class="btn btn-danger">Confirmer</button>
+    <a asp-action="Index" class="btn btn-secondary" role="button">Annuler</a>
+</form>

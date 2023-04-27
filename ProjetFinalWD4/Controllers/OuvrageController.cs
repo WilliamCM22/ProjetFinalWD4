@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using ProjetFinalWD4.Data;
 using ProjetFinalWD4.Models;
 using System.Collections.Immutable;
+using System.Security.Claims;
 
 namespace ProjetFinalWD4.Controllers
 {
@@ -15,7 +16,7 @@ namespace ProjetFinalWD4.Controllers
         {
             _bibliotheque= bibliotheque;
         }
-        //non necessaire....
+        
         public async Task<IActionResult> Index()
         {
             var ouvrages = await _bibliotheque.Ouvrages.ToListAsync();
@@ -27,6 +28,11 @@ namespace ProjetFinalWD4.Controllers
         {
             var ouvrages = await _bibliotheque.Ouvrages.ToListAsync();
             var reservations = await _bibliotheque.Reservations.ToListAsync();
+            int userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+            var reservationCount = await _bibliotheque.Reservations
+                .CountAsync(v => v.Utilisateur.ID == userId);
+
+            ViewBag.ReservationCount = reservationCount;
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -57,6 +63,7 @@ namespace ProjetFinalWD4.Controllers
         public async Task<IActionResult> Modification(int id)
         {
             var ouvrage = await _bibliotheque.Ouvrages.FindAsync(id);
+            var reservations = await _bibliotheque.Reservations.ToListAsync();
 
             if (ouvrage != null)
             {
@@ -66,7 +73,7 @@ namespace ProjetFinalWD4.Controllers
                     Titre = ouvrage.Titre,
                     Auteur = ouvrage.Auteur,
                     Exemplaires = ouvrage.Exemplaires,
-                    QuantiteDisponible = 0
+                    QuantiteDisponible = ouvrage.Exemplaires - reservations.Count(reservation => reservation.Ouvrage.ID == ouvrage.ID)
                 };
 
                 return View(ouvragesReservations);
@@ -98,7 +105,6 @@ namespace ProjetFinalWD4.Controllers
                 }
 
                 await _bibliotheque.SaveChangesAsync();
-
                 return RedirectToAction(nameof(Index));
             }
             return NotFound();
