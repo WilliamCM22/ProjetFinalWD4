@@ -5,8 +5,6 @@ using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using ProjetFinalWD4.Data;
 using ProjetFinalWD4.Models;
 using System.Collections.Immutable;
-using System.Data;
-using System.Security.Claims;
 
 namespace ProjetFinalWD4.Controllers
 {
@@ -18,7 +16,7 @@ namespace ProjetFinalWD4.Controllers
         {
             _bibliotheque= bibliotheque;
         }
-        [Authorize(Roles = "Admin, Usager")]
+        //non necessaire....
         public async Task<IActionResult> Index()
         {
             var ouvrages = await _bibliotheque.Ouvrages.ToListAsync();
